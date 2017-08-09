@@ -8,10 +8,9 @@
   function meanData ($http, authentication) {
 
     var getProfile = function () {
+      // set jwt to true to inject the Authorization header automatically
       return $http.get('/api/profile', {
-        headers: {
-          Authorization: 'Bearer '+ authentication.getToken()
-        }
+        jwt: true
       });
     };
 

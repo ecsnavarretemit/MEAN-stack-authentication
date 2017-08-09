@@ -2,7 +2,31 @@
 
   angular
     .module('meanApp')
-    .service('authentication', authentication);
+    .service('authentication', authentication)
+    .factory('jwtInjector', jwtInjector)
+    .config(['$httpProvider', function($httpProvider) {
+      $httpProvider.interceptors.push('jwtInjector');
+    }])
+    ;
+
+  jwtInjector.$inject = ['$window'];
+  function jwtInjector($window) {
+    return {
+      request: function(config) {
+
+        // inject JWT token in the HTTP request headers using the header field: Authorization
+        if (
+          typeof $window.localStorage['mean-token'] !== 'undefined' &&
+          typeof config.jwt !== 'undefined' &&
+          config.jwt === true
+        ) {
+          config.headers['Authorization'] = 'Bearer ' + $window.localStorage['mean-token'];
+        }
+
+        return config;
+      }
+    };
+  }
 
   authentication.$inject = ['$http', '$window'];
   function authentication ($http, $window) {
