@@ -1,9 +1,17 @@
 <navigation></navigation>
 
 <div class="container">
-  
-  <h1>Hello there</h1>
 
-  <p>Won't you please <a href="login">sign in</a> or <a href="register">register</a>?</p>
+  <div ng-hide="vm.isLoggedIn">
+    <h1 >Hello there</h1>
+
+    <p>Won't you please <a href="login">sign in</a> or <a href="register">register</a>?</p>
+  </div>
+
+  <div ng-show="vm.isLoggedIn">
+    <h1 >Hello there</h1>
+
+    <p>You are currently logged in</p>
+  </div>
 
 </div>
