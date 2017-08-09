@@ -24,6 +24,10 @@
         controller: 'profileCtrl',
         controllerAs: 'vm'
       })
+      .when('/logout', {
+        template: '',
+        controller: 'logoutCtrl'
+      })
       .otherwise({redirectTo: '/'});
 
     // use the HTML5 History API
@@ -37,7 +41,7 @@
       }
     });
   }
-  
+
   angular
     .module('meanApp')
     .config(['$routeProvider', '$locationProvider', config])
